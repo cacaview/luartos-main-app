@@ -12,6 +12,11 @@
 -- This module depends on events_init.lua
 local events = require("APP.main.events_init")
 
+-- Helper function to convert percentage to LVGL opacity value (0-255)
+function lvgl.opa_pct(pct)
+    return math.floor(pct * 255 / 100)
+end
+
 -- Helper function to scan for applications using the new C API
 local function get_apps()
     local apps = {}
@@ -54,15 +59,14 @@ end
 local function create_app_widget(parent, app_info)
     local app_container = lvgl.obj_create(parent)
     lvgl.obj_set_size(app_container, lvgl.pct(45), lvgl.pct(90))
-    lvgl.obj_add_style(app_container, {
-        bg_color = lvgl.color_hex(0xffffff),
-        radius = 10,
-        shadow_width = 5,
-        shadow_opa = lvgl.OPA_20(),
-        shadow_ofs_y = 3
-    }, 0)
-    lvgl.obj_set_flex_flow(app_container, lvgl.FLEX_FLOW_COLUMN())
-    lvgl.obj_set_flex_align(app_container, lvgl.FLEX_ALIGN_SPACE_AROUND(), lvgl.FLEX_ALIGN_CENTER(), lvgl.FLEX_ALIGN_CENTER())
+    -- Replace obj_add_style with individual style settings
+    lvgl.obj_set_style_bg_color(app_container, lvgl.color_hex(0xffffff), 0)
+    lvgl.obj_set_style_radius(app_container, 10, 0)
+    lvgl.obj_set_style_shadow_width(app_container, 5, 0)
+    lvgl.obj_set_style_shadow_opa(app_container, 51, 0)
+    lvgl.obj_set_style_shadow_ofs_y(app_container, 3, 0)
+    lvgl.obj_set_flex_flow(app_container, lvgl.FLEX_FLOW_COLUMN)
+    lvgl.obj_set_flex_align(app_container, lvgl.FLEX_ALIGN_SPACE_AROUND, lvgl.FLEX_ALIGN_CENTER, lvgl.FLEX_ALIGN_CENTER)
 
     local name_label = lvgl.label_create(app_container)
     lvgl.label_set_text(name_label, app_info.name:sub(1,1):upper()..app_info.name:sub(2)) -- Capitalize first letter
@@ -75,9 +79,11 @@ local function create_app_widget(parent, app_info)
     local open_btn = lvgl.btn_create(app_container)
     local btn_label = lvgl.label_create(open_btn)
     lvgl.label_set_text(btn_label, "Open")
+    -- The C binding for obj_add_event_cb only takes the object and the callback function.
+    -- It implicitly handles all events and manages user data internally.
     lvgl.obj_add_event_cb(open_btn, function(e)
         local code = lvgl.event_get_code(e)
-        if code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_CLICKED then
             print("Request to open app: " .. app_info.path)
             -- Attempt to load and run the app's main file
             local success, err = pcall(require, "APP." .. app_info.path .. ".main")
@@ -85,7 +91,7 @@ local function create_app_widget(parent, app_info)
                 print("Error opening app '" .. app_info.path .. "': " .. tostring(err))
             end
         end
-    end, lvgl.EVENT_ALL(), nil)
+    end)
 
     return app_container
 end
@@ -100,34 +106,34 @@ function setup_scr_main(ui)
         return
     end
     lvgl.obj_set_size(ui.main, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.main, lvgl.SCROLLBAR_MODE_OFF())
+    lvgl.obj_set_scrollbar_mode(ui.main, lvgl.SCROLLBAR_MODE_OFF)
 
     -- Style for main screen
-    lvgl.obj_set_style_bg_opa(ui.main, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
+    lvgl.obj_set_style_bg_opa(ui.main, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
 
     -- Create the tabview using the newly bound function
-    ui.main_tabview_1 = lvgl.tabview_create(ui.main, lvgl.DIR_TOP(), 50)
+    ui.main_tabview_1 = lvgl.tabview_create(ui.main, lvgl.DIR_TOP, 50)
     if not ui.main_tabview_1 then
         print("Error: Failed to create main_tabview_1")
         return
     end
     lvgl.obj_set_pos(ui.main_tabview_1, 1, 0)
     lvgl.obj_set_size(ui.main_tabview_1, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.main_tabview_1, lvgl.SCROLLBAR_MODE_OFF())
+    lvgl.obj_set_scrollbar_mode(ui.main_tabview_1, lvgl.SCROLLBAR_MODE_OFF)
 
     -- Style for main_tabview_1
-    lvgl.obj_set_style_bg_opa(ui.main_tabview_1, 255, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_bg_color(ui.main_tabview_1, lvgl.color_hex(0xeaeff3), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_bg_grad_dir(ui.main_tabview_1, lvgl.GRAD_DIR_NONE(), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_text_color(ui.main_tabview_1, lvgl.color_hex(0x4d4d4d), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
+    lvgl.obj_set_style_bg_opa(ui.main_tabview_1, 255, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_bg_color(ui.main_tabview_1, lvgl.color_hex(0xeaeff3), lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_bg_grad_dir(ui.main_tabview_1, lvgl.GRAD_DIR_NONE, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_text_color(ui.main_tabview_1, lvgl.color_hex(0x4d4d4d), lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
     -- TODO: Font lv_font_montserratMedium_12 not available. Using lv_font_montserrat_12.
-    lvgl.obj_set_style_text_font(ui.main_tabview_1, lvgl.font_montserrat_12(), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_text_opa(ui.main_tabview_1, 255, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_text_letter_space(ui.main_tabview_1, 2, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_text_line_space(ui.main_tabview_1, 16, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_border_width(ui.main_tabview_1, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_radius(ui.main_tabview_1, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_shadow_width(ui.main_tabview_1, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
+    lvgl.obj_set_style_text_font(ui.main_tabview_1, lvgl.font_montserrat_12(), lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_text_opa(ui.main_tabview_1, 255, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_text_letter_space(ui.main_tabview_1, 2, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_text_line_space(ui.main_tabview_1, 16, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_border_width(ui.main_tabview_1, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_radius(ui.main_tabview_1, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_shadow_width(ui.main_tabview_1, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
 
     -- Add tabs using the newly bound function
     ui.main_tabview_1_tab_1 = lvgl.tabview_add_tab(ui.main_tabview_1, "Apps")
@@ -178,13 +184,13 @@ function setup_scr_main(ui)
     end
     -- NOTE: LV_SYMBOL_BLUETOOTH and LV_SYMBOL_SETTINGS are not standard LVGL symbols.
     -- Using LV_SYMBOL_WIFI as a placeholder.
-    ui.main_list_1_item0 = lvgl.list_add_btn(ui.main_list_1, lvgl.SYMBOL_WIFI(), "WiFi")
+    ui.main_list_1_item0 = lvgl.list_add_btn(ui.main_list_1, lvgl.SYMBOL_WIFI, "WiFi")
     if not ui.main_list_1_item0 then print("Error: Failed to create main_list_1_item0") return end
     
-    ui.main_list_1_item1 = lvgl.list_add_btn(ui.main_list_1, lvgl.SYMBOL_WIFI(), "Bluetooth")
+    ui.main_list_1_item1 = lvgl.list_add_btn(ui.main_list_1, lvgl.SYMBOL_WIFI, "Bluetooth")
     if not ui.main_list_1_item1 then print("Error: Failed to create main_list_1_item1") return end
     
-    ui.main_list_1_item2 = lvgl.list_add_btn(ui.main_list_1, lvgl.SYMBOL_WIFI(), "Hotspot")
+    ui.main_list_1_item2 = lvgl.list_add_btn(ui.main_list_1, lvgl.SYMBOL_WIFI, "Hotspot")
     if not ui.main_list_1_item2 then print("Error: Failed to create main_list_1_item2") return end
     lvgl.obj_set_pos(ui.main_list_1, 58, 27)
     lvgl.obj_set_size(ui.main_list_1, 319, 156)
@@ -193,19 +199,19 @@ function setup_scr_main(ui)
     -- Refactoring style for list buttons
     local list_btn_style_items = {ui.main_list_1_item0, ui.main_list_1_item1, ui.main_list_1_item2}
     for _, item in ipairs(list_btn_style_items) do
-        lvgl.obj_set_style_pad_top(item, 5, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_pad_left(item, 5, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_pad_right(item, 5, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_pad_bottom(item, 5, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_border_width(item, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_text_color(item, lvgl.color_hex(0x0D3055), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
+        lvgl.obj_set_style_pad_top(item, 5, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_pad_left(item, 5, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_pad_right(item, 5, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_pad_bottom(item, 5, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_border_width(item, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_text_color(item, lvgl.color_hex(0x0D3055), lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
         -- TODO: Font lv_font_montserratMedium_12 not available.
-        lvgl.obj_set_style_text_font(item, lvgl.font_montserrat_12(), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_text_opa(item, 255, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_radius(item, 3, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_bg_opa(item, 255, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_bg_color(item, lvgl.color_hex(0xffffff), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-        lvgl.obj_set_style_bg_grad_dir(item, lvgl.GRAD_DIR_NONE(), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
+        lvgl.obj_set_style_text_font(item, lvgl.font_montserrat_12(), lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_text_opa(item, 255, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_radius(item, 3, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_bg_opa(item, 255, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_bg_color(item, lvgl.color_hex(0xffffff), lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+        lvgl.obj_set_style_bg_grad_dir(item, lvgl.GRAD_DIR_NONE, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
     end
 
     -- lv_obj_update_layout is not typically needed as LVGL handles layout updates automatically.

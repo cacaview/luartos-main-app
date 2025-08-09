@@ -104,7 +104,7 @@ function gui_guider.setup_ui(ui)
     -- lv_scr_load is not directly bound. Use lv_scr_load_anim with no animation.
     if ui.main then
         -- Assuming LV_SCR_LOAD_ANIM_NONE is 0 or available in lvgl constants
-        local anim_none = lvgl.SCR_LOAD_ANIM_NONE()
+        local anim_none = lvgl.SCR_LOAD_ANIM_NONE
         lvgl.scr_load_anim(ui.main, anim_none, 0, 0, false)
     else
         print("Error: ui.main screen not available after setup.")
