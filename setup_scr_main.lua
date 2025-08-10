@@ -84,9 +84,57 @@ local function create_app_widget(parent, app_info)
     lvgl.obj_add_event_cb(open_btn, function(e)
         local code = lvgl.event_get_code(e)
         if code == lvgl.EVENT_CLICKED then
-            print("Request to open app: " .. app_info.path)
-            -- Attempt to load and run the app's main file
-            local success, err = pcall(require, "APP." .. app_info.path .. ".main")
+            local app_root_path = "/sdcard/APP/" .. app_info.path
+            local app_main_script = app_root_path .. "/main.lua"
+            print("Request to open app: " .. app_main_script)
+
+            local original_require = require
+            local app_require = function(module_path)
+                -- Check if the module is already loaded to handle all cases, including circular deps
+                if package.loaded[module_path] then
+                    return package.loaded[module_path]
+                end
+
+                local real_path
+                -- Case 1: Relative path module inside the app (e.g., "gui_guider")
+                if not module_path:find("%.") then
+                    real_path = app_root_path .. "/" .. module_path .. ".lua"
+                    print("Remapping relative require: '" .. module_path .. "' -> " .. real_path)
+                -- Case 2: Absolute path module for this specific app (e.g., "APP.explorer.widgets_init")
+                elseif module_path:match("^APP%.([^%.]+)") == app_info.name then
+                    local sub_path_dots = module_path:match("^APP%.[^%.]+%.(.*)")
+                    if not sub_path_dots then return original_require(module_path) end
+                    local sub_path_slashes = sub_path_dots:gsub("%.", "/")
+                    real_path = app_root_path .. "/" .. sub_path_slashes .. ".lua"
+                    print("Remapping absolute require: '" .. module_path .. "' -> " .. real_path)
+                -- Case 3: Any other module (system, etc.)
+                else
+                    return original_require(module_path)
+                end
+
+                -- CRITICAL STEP for circular dependency:
+                -- Mark the module as loaded *before* executing it.
+                package.loaded[module_path] = true
+
+                local ok, result = pcall(dofile, real_path)
+                if not ok then
+                    package.loaded[module_path] = nil -- Unload on error
+                    error("Failed to load module '"..module_path.."' from path '"..real_path.."': "..tostring(result), 2)
+                end
+
+                -- If the module returned a value, update package.loaded with it.
+                -- If it didn't (just executed code), the 'true' placeholder remains.
+                if result ~= nil then
+                    package.loaded[module_path] = result
+                end
+
+                return package.loaded[module_path]
+            end
+
+            _G.require = app_require
+            local success, err = pcall(dofile, app_main_script)
+            _G.require = original_require
+
             if not success then
                 print("Error opening app '" .. app_info.path .. "': " .. tostring(err))
             end

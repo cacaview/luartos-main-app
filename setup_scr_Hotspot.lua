@@ -19,8 +19,8 @@ function setup_scr_Hotspot(ui)
         return
     end
     lvgl.obj_set_size(ui.Hotspot, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.Hotspot, lvgl.SCROLLBAR_MODE_OFF())
-    lvgl.obj_set_style_bg_opa(ui.Hotspot, 0, lvgl.PART_MAIN())
+    lvgl.obj_set_scrollbar_mode(ui.Hotspot, lvgl.SCROLLBAR_MODE_OFF)
+    lvgl.obj_set_style_bg_opa(ui.Hotspot, 0, lvgl.PART_MAIN)
 
     -- Create container
     ui.Hotspot_cont_1 = lvgl.obj_create(ui.Hotspot)
@@ -30,12 +30,12 @@ function setup_scr_Hotspot(ui)
     end
     lvgl.obj_set_pos(ui.Hotspot_cont_1, 0, 0)
     lvgl.obj_set_size(ui.Hotspot_cont_1, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.Hotspot_cont_1, lvgl.SCROLLBAR_MODE_OFF())
+    lvgl.obj_set_scrollbar_mode(ui.Hotspot_cont_1, lvgl.SCROLLBAR_MODE_OFF)
     -- Styles for container
-    lvgl.obj_set_style_border_width(ui.Hotspot_cont_1, 2, lvgl.PART_MAIN())
-    lvgl.obj_set_style_border_color(ui.Hotspot_cont_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_border_side(ui.Hotspot_cont_1, lvgl.BORDER_SIDE_FULL(), lvgl.PART_MAIN())
-    lvgl.obj_set_style_bg_color(ui.Hotspot_cont_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN())
+    lvgl.obj_set_style_border_width(ui.Hotspot_cont_1, 2, lvgl.PART_MAIN)
+    lvgl.obj_set_style_border_color(ui.Hotspot_cont_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_border_side(ui.Hotspot_cont_1, lvgl.BORDER_SIDE_FULL, lvgl.PART_MAIN)
+    lvgl.obj_set_style_bg_color(ui.Hotspot_cont_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN)
 
     -- Spangroup "hotspot"
     ui.Hotspot_spangroup_1 = lvgl.spangroup_create(ui.Hotspot_cont_1)
@@ -43,8 +43,8 @@ function setup_scr_Hotspot(ui)
         print("Error: Failed to create Hotspot_spangroup_1")
         return
     end
-    lvgl.spangroup_set_align(ui.Hotspot_spangroup_1, lvgl.TEXT_ALIGN_LEFT())
-    lvgl.spangroup_set_mode(ui.Hotspot_spangroup_1, lvgl.SPAN_MODE_BREAK())
+    lvgl.spangroup_set_align(ui.Hotspot_spangroup_1, lvgl.TEXT_ALIGN_LEFT)
+    lvgl.spangroup_set_mode(ui.Hotspot_spangroup_1, lvgl.SPAN_MODE_BREAK)
     ui.Hotspot_spangroup_1_span = lvgl.spangroup_new_span(ui.Hotspot_spangroup_1)
     lvgl.span_set_text(ui.Hotspot_spangroup_1_span, "hotspot")
     -- TODO: Direct span styling not supported
@@ -64,15 +64,15 @@ function setup_scr_Hotspot(ui)
         return
     end
     lvgl.label_set_text(ui.Hotspot_btn_1_label, "back")
-    lvgl.obj_align(ui.Hotspot_btn_1_label, lvgl.ALIGN_CENTER(), 0, 0)
+    lvgl.obj_align(ui.Hotspot_btn_1_label, lvgl.ALIGN_CENTER, 0, 0)
     lvgl.obj_set_pos(ui.Hotspot_btn_1, 17, 20)
     lvgl.obj_set_size(ui.Hotspot_btn_1, 65, 40)
     -- Styles for back button
-    lvgl.obj_set_style_bg_color(ui.Hotspot_btn_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.Hotspot_btn_1, 5, lvgl.PART_MAIN())
-    lvgl.obj_set_style_text_color(ui.Hotspot_btn_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN())
+    lvgl.obj_set_style_bg_color(ui.Hotspot_btn_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.Hotspot_btn_1, 5, lvgl.PART_MAIN)
+    lvgl.obj_set_style_text_color(ui.Hotspot_btn_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN)
     -- TODO: Font lv_font_montserratMedium_16 not available
-    lvgl.obj_set_style_text_font(ui.Hotspot_btn_1, lvgl.font_montserrat_16(), lvgl.PART_MAIN())
+    lvgl.obj_set_style_text_font(ui.Hotspot_btn_1, lvgl.font_montserrat_16(), lvgl.PART_MAIN)
 
     -- Switch
     ui.Hotspot_sw_1 = lvgl.switch_create(ui.Hotspot_cont_1)
@@ -83,11 +83,11 @@ function setup_scr_Hotspot(ui)
     lvgl.obj_set_pos(ui.Hotspot_sw_1, 386, 37)
     lvgl.obj_set_size(ui.Hotspot_sw_1, 44, 20)
     -- Styles for switch
-    lvgl.obj_set_style_bg_color(ui.Hotspot_sw_1, lvgl.color_hex(0xe6e2e6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.Hotspot_sw_1, 10, lvgl.PART_MAIN())
-    lvgl.obj_set_style_bg_color(ui.Hotspot_sw_1, lvgl.color_hex(0x2195f6), lvgl.PART_INDICATOR() + lvgl.STATE_CHECKED())
-    lvgl.obj_set_style_bg_color(ui.Hotspot_sw_1, lvgl.color_hex(0xffffff), lvgl.PART_KNOB())
-    lvgl.obj_set_style_radius(ui.Hotspot_sw_1, 10, lvgl.PART_KNOB())
+    lvgl.obj_set_style_bg_color(ui.Hotspot_sw_1, lvgl.color_hex(0xe6e2e6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.Hotspot_sw_1, 10, lvgl.PART_MAIN)
+    lvgl.obj_set_style_bg_color(ui.Hotspot_sw_1, lvgl.color_hex(0x2195f6), lvgl.PART_INDICATOR + lvgl.STATE_CHECKED)
+    lvgl.obj_set_style_bg_color(ui.Hotspot_sw_1, lvgl.color_hex(0xffffff), lvgl.PART_KNOB)
+    lvgl.obj_set_style_radius(ui.Hotspot_sw_1, 10, lvgl.PART_KNOB)
 
     -- TODO: lv_obj_update_layout is not bound.
     -- lvgl.obj_update_layout(ui.Hotspot)

@@ -18,28 +18,28 @@ local events = {}
 function events.events_init_main(ui)
     local function main_list_1_item0_event_handler(e)
         local code = lvgl.event_get_code(e)
-        if code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_CLICKED then
             -- Create a wrapper table to simulate pass-by-reference for the boolean flag
             local old_scr_del_ref = { value = ui.main_del }
-            gui_guider.ui_load_scr_animation(ui, "WiFi", ui.WiFi_del, old_scr_del_ref, "APP.main.setup_scr_WiFi", lvgl.SCR_LOAD_ANIM_NONE(), 200, 200, true, true)
+            gui_guider.ui_load_scr_animation(ui, "WiFi", ui.WiFi_del, old_scr_del_ref, "APP.main.setup_scr_WiFi", lvgl.SCR_LOAD_ANIM_NONE, 200, 200, true, true)
             ui.main_del = old_scr_del_ref.value -- Update the value from the reference table
         end
     end
 
     local function main_list_1_item1_event_handler(e)
         local code = lvgl.event_get_code(e)
-        if code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_CLICKED then
             local old_scr_del_ref = { value = ui.main_del }
-            gui_guider.ui_load_scr_animation(ui, "Bluetooth", ui.Bluetooth_del, old_scr_del_ref, "APP.main.setup_scr_Bluetooth", lvgl.SCR_LOAD_ANIM_NONE(), 200, 200, false, true)
+            gui_guider.ui_load_scr_animation(ui, "Bluetooth", ui.Bluetooth_del, old_scr_del_ref, "APP.main.setup_scr_Bluetooth", lvgl.SCR_LOAD_ANIM_NONE, 200, 200, false, true)
             ui.main_del = old_scr_del_ref.value
         end
     end
 
     local function main_list_1_item2_event_handler(e)
         local code = lvgl.event_get_code(e)
-        if code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_CLICKED then
             local old_scr_del_ref = { value = ui.main_del }
-            gui_guider.ui_load_scr_animation(ui, "Hotspot", ui.Hotspot_del, old_scr_del_ref, "APP.main.setup_scr_Hotspot", lvgl.SCR_LOAD_ANIM_NONE(), 200, 200, false, true)
+            gui_guider.ui_load_scr_animation(ui, "Hotspot", ui.Hotspot_del, old_scr_del_ref, "APP.main.setup_scr_Hotspot", lvgl.SCR_LOAD_ANIM_NONE, 200, 200, false, true)
             ui.main_del = old_scr_del_ref.value
         end
     end
@@ -52,14 +52,14 @@ end
 function events.events_init_WiFi(ui)
     local function WiFi_btn_1_event_handler(e)
         local code = lvgl.event_get_code(e)
-        if code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_CLICKED then
             local old_scr_del_ref = { value = ui.WiFi_del }
             -- The main screen is already loaded, so we don't need to re-run its setup.
             -- However, to keep the animation logic consistent, we pass a dummy function name
             -- and handle it inside the animation function if needed. Or, more simply,
             -- just load the screen directly if it already exists.
             -- For now, we assume re-creating it is fine.
-            gui_guider.ui_load_scr_animation(ui, "main", ui.main_del, old_scr_del_ref, "APP.main.setup_scr_main", lvgl.SCR_LOAD_ANIM_NONE(), 200, 200, true, true)
+            gui_guider.ui_load_scr_animation(ui, "main", ui.main_del, old_scr_del_ref, "APP.main.setup_scr_main", lvgl.SCR_LOAD_ANIM_NONE, 200, 200, true, true)
             ui.WiFi_del = old_scr_del_ref.value
         end
     end
@@ -70,9 +70,9 @@ end
 function events.events_init_wifi_password(ui)
     local function wifi_password_btn_2_event_handler(e)
         local code = lvgl.event_get_code(e)
-        if code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_CLICKED then
             local old_scr_del_ref = { value = ui.wifi_password_del }
-            gui_guider.ui_load_scr_animation(ui, "WiFi", ui.WiFi_del, old_scr_del_ref, "APP.main.setup_scr_WiFi", lvgl.SCR_LOAD_ANIM_NONE(), 200, 200, true, true)
+            gui_guider.ui_load_scr_animation(ui, "WiFi", ui.WiFi_del, old_scr_del_ref, "APP.main.setup_scr_WiFi", lvgl.SCR_LOAD_ANIM_NONE, 200, 200, true, true)
             ui.wifi_password_del = old_scr_del_ref.value
         end
     end
@@ -83,9 +83,9 @@ end
 function events.events_init_Bluetooth(ui)
     local function Bluetooth_btn_1_event_handler(e)
         local code = lvgl.event_get_code(e)
-        if code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_CLICKED then
             local old_scr_del_ref = { value = ui.Bluetooth_del }
-            gui_guider.ui_load_scr_animation(ui, "main", ui.main_del, old_scr_del_ref, "APP.main.setup_scr_main", lvgl.SCR_LOAD_ANIM_NONE(), 200, 200, true, true)
+            gui_guider.ui_load_scr_animation(ui, "main", ui.main_del, old_scr_del_ref, "APP.main.setup_scr_main", lvgl.SCR_LOAD_ANIM_NONE, 200, 200, true, true)
             ui.Bluetooth_del = old_scr_del_ref.value
         end
     end
@@ -96,9 +96,9 @@ end
 function events.events_init_Hotspot(ui)
     local function Hotspot_btn_1_event_handler(e)
         local code = lvgl.event_get_code(e)
-        if code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_CLICKED then
             local old_scr_del_ref = { value = ui.Hotspot_del }
-            gui_guider.ui_load_scr_animation(ui, "main", ui.main_del, old_scr_del_ref, "APP.main.setup_scr_main", lvgl.SCR_LOAD_ANIM_NONE(), 200, 200, true, true)
+            gui_guider.ui_load_scr_animation(ui, "main", ui.main_del, old_scr_del_ref, "APP.main.setup_scr_main", lvgl.SCR_LOAD_ANIM_NONE, 200, 200, true, true)
             ui.Hotspot_del = old_scr_del_ref.value
         end
     end

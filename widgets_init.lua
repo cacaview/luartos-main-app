@@ -16,8 +16,8 @@ function widgets_init.kb_event_cb(e)
     local code = lvgl.event_get_code(e)
     local kb = lvgl.event_get_target(e)
 
-    if code == lvgl.EVENT_READY() or code == lvgl.EVENT_CANCEL() then
-        lvgl.obj_add_flag(kb, lvgl.OBJ_FLAG_HIDDEN())
+    if code == lvgl.EVENT_READY or code == lvgl.EVENT_CANCEL then
+        lvgl.obj_add_flag(kb, lvgl.OBJ_FLAG_HIDDEN)
     end
 end
 
@@ -36,7 +36,7 @@ function widgets_init.get_ta_event_cb(ui)
             return
         end
 
-        if code == lvgl.EVENT_FOCUSED() or code == lvgl.EVENT_CLICKED() then
+        if code == lvgl.EVENT_FOCUSED or code == lvgl.EVENT_CLICKED then
             if lvgl.keyboard_set_textarea then
                 lvgl.keyboard_set_textarea(kb, ta)
             else
@@ -47,9 +47,9 @@ function widgets_init.get_ta_event_cb(ui)
             -- TODO: Binding for lv_obj_move_foreground does not exist.
             print("Warning: lv_obj_move_foreground binding not found.")
 
-            lvgl.obj_clear_flag(kb, lvgl.OBJ_FLAG_HIDDEN())
+            lvgl.obj_clear_flag(kb, lvgl.OBJ_FLAG_HIDDEN)
 
-        elseif code == lvgl.EVENT_CANCEL() or code == lvgl.EVENT_DEFOCUSED() then
+        elseif code == lvgl.EVENT_CANCEL or code == lvgl.EVENT_DEFOCUSED then
             if lvgl.keyboard_set_textarea then
                 lvgl.keyboard_set_textarea(kb, ta)
             end
@@ -57,7 +57,7 @@ function widgets_init.get_ta_event_cb(ui)
             -- TODO: Binding for lv_obj_move_background does not exist.
             print("Warning: lv_obj_move_background binding not found.")
 
-            lvgl.obj_add_flag(kb, lvgl.OBJ_FLAG_HIDDEN())
+            lvgl.obj_add_flag(kb, lvgl.OBJ_FLAG_HIDDEN)
         end
     end
 end

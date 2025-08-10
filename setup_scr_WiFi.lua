@@ -19,8 +19,8 @@ function setup_scr_WiFi(ui)
         return
     end
     lvgl.obj_set_size(ui.WiFi, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.WiFi, lvgl.SCROLLBAR_MODE_OFF())
-    lvgl.obj_set_style_bg_opa(ui.WiFi, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
+    lvgl.obj_set_scrollbar_mode(ui.WiFi, lvgl.SCROLLBAR_MODE_OFF)
+    lvgl.obj_set_style_bg_opa(ui.WiFi, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
 
     -- Create container
     ui.WiFi_cont_1 = lvgl.obj_create(ui.WiFi)
@@ -30,18 +30,18 @@ function setup_scr_WiFi(ui)
     end
     lvgl.obj_set_pos(ui.WiFi_cont_1, 0, 0)
     lvgl.obj_set_size(ui.WiFi_cont_1, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.WiFi_cont_1, lvgl.SCROLLBAR_MODE_OFF())
+    lvgl.obj_set_scrollbar_mode(ui.WiFi_cont_1, lvgl.SCROLLBAR_MODE_OFF)
 
     -- Style for container
-    lvgl.obj_set_style_border_width(ui.WiFi_cont_1, 2, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_border_opa(ui.WiFi_cont_1, 255, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_border_color(ui.WiFi_cont_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_border_side(ui.WiFi_cont_1, lvgl.BORDER_SIDE_FULL(), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_radius(ui.WiFi_cont_1, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_bg_opa(ui.WiFi_cont_1, 255, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_bg_color(ui.WiFi_cont_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_pad_all(ui.WiFi_cont_1, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
-    lvgl.obj_set_style_shadow_width(ui.WiFi_cont_1, 0, lvgl.PART_MAIN() + lvgl.STATE_DEFAULT())
+    lvgl.obj_set_style_border_width(ui.WiFi_cont_1, 2, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_border_opa(ui.WiFi_cont_1, 255, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_border_color(ui.WiFi_cont_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_border_side(ui.WiFi_cont_1, lvgl.BORDER_SIDE_FULL, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_radius(ui.WiFi_cont_1, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_bg_opa(ui.WiFi_cont_1, 255, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_bg_color(ui.WiFi_cont_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_pad_all(ui.WiFi_cont_1, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
+    lvgl.obj_set_style_shadow_width(ui.WiFi_cont_1, 0, lvgl.PART_MAIN + lvgl.STATE_DEFAULT)
 
     -- TODO: The entire lv_menu widget family is not bound in Lua.
     -- The following section cannot be translated without adding new bindings for:
@@ -55,7 +55,7 @@ function setup_scr_WiFi(ui)
     end
     lvgl.obj_set_pos(ui.WiFi_menu_1, 55, 85)
     lvgl.obj_set_size(ui.WiFi_menu_1, 368, 213)
-    lvgl.obj_set_style_bg_color(ui.WiFi_menu_1, lvgl.color_hex(0xcccccc), lvgl.PART_MAIN()) -- Visual placeholder
+    lvgl.obj_set_style_bg_color(ui.WiFi_menu_1, lvgl.color_hex(0xcccccc), lvgl.PART_MAIN) -- Visual placeholder
     local menu_placeholder_label = lvgl.label_create(ui.WiFi_menu_1)
     if not menu_placeholder_label then
         print("Error: Failed to create menu_placeholder_label")
@@ -71,9 +71,9 @@ function setup_scr_WiFi(ui)
         print("Error: Failed to create WiFi_WiFi_text")
         return
     end
-    lvgl.spangroup_set_align(ui.WiFi_WiFi_text, lvgl.TEXT_ALIGN_LEFT())
-    lvgl.spangroup_set_overflow(ui.WiFi_WiFi_text, lvgl.SPAN_OVERFLOW_CLIP())
-    lvgl.spangroup_set_mode(ui.WiFi_WiFi_text, lvgl.SPAN_MODE_BREAK())
+    lvgl.spangroup_set_align(ui.WiFi_WiFi_text, lvgl.TEXT_ALIGN_LEFT)
+    lvgl.spangroup_set_overflow(ui.WiFi_WiFi_text, lvgl.SPAN_OVERFLOW_CLIP)
+    lvgl.spangroup_set_mode(ui.WiFi_WiFi_text, lvgl.SPAN_MODE_BREAK)
     ui.WiFi_WiFi_text_span = lvgl.spangroup_new_span(ui.WiFi_WiFi_text)
     lvgl.span_set_text(ui.WiFi_WiFi_text_span, "WiFi")
     -- TODO: Direct span styling is not supported.
@@ -93,15 +93,15 @@ function setup_scr_WiFi(ui)
         return
     end
     lvgl.label_set_text(ui.WiFi_btn_1_label, "back")
-    lvgl.obj_align(ui.WiFi_btn_1_label, lvgl.ALIGN_CENTER(), 0, 0)
+    lvgl.obj_align(ui.WiFi_btn_1_label, lvgl.ALIGN_CENTER, 0, 0)
     lvgl.obj_set_pos(ui.WiFi_btn_1, 17, 20)
     lvgl.obj_set_size(ui.WiFi_btn_1, 65, 40)
     -- Styles for back button
-    lvgl.obj_set_style_bg_color(ui.WiFi_btn_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.WiFi_btn_1, 5, lvgl.PART_MAIN())
-    lvgl.obj_set_style_text_color(ui.WiFi_btn_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN())
+    lvgl.obj_set_style_bg_color(ui.WiFi_btn_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.WiFi_btn_1, 5, lvgl.PART_MAIN)
+    lvgl.obj_set_style_text_color(ui.WiFi_btn_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN)
     -- TODO: Font lv_font_montserratMedium_16 not available.
-    lvgl.obj_set_style_text_font(ui.WiFi_btn_1, lvgl.font_montserrat_16(), lvgl.PART_MAIN())
+    lvgl.obj_set_style_text_font(ui.WiFi_btn_1, lvgl.font_montserrat_16(), lvgl.PART_MAIN)
 
     -- Switch
     ui.WiFi_sw_1 = lvgl.switch_create(ui.WiFi_cont_1)
@@ -112,11 +112,11 @@ function setup_scr_WiFi(ui)
     lvgl.obj_set_pos(ui.WiFi_sw_1, 386, 37)
     lvgl.obj_set_size(ui.WiFi_sw_1, 44, 20)
     -- Styles for switch
-    lvgl.obj_set_style_bg_color(ui.WiFi_sw_1, lvgl.color_hex(0xe6e2e6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.WiFi_sw_1, 10, lvgl.PART_MAIN())
-    lvgl.obj_set_style_bg_color(ui.WiFi_sw_1, lvgl.color_hex(0x2195f6), lvgl.PART_INDICATOR() + lvgl.STATE_CHECKED())
-    lvgl.obj_set_style_bg_color(ui.WiFi_sw_1, lvgl.color_hex(0xffffff), lvgl.PART_KNOB())
-    lvgl.obj_set_style_radius(ui.WiFi_sw_1, 10, lvgl.PART_KNOB())
+    lvgl.obj_set_style_bg_color(ui.WiFi_sw_1, lvgl.color_hex(0xe6e2e6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.WiFi_sw_1, 10, lvgl.PART_MAIN)
+    lvgl.obj_set_style_bg_color(ui.WiFi_sw_1, lvgl.color_hex(0x2195f6), lvgl.PART_INDICATOR + lvgl.STATE_CHECKED)
+    lvgl.obj_set_style_bg_color(ui.WiFi_sw_1, lvgl.color_hex(0xffffff), lvgl.PART_KNOB)
+    lvgl.obj_set_style_radius(ui.WiFi_sw_1, 10, lvgl.PART_KNOB)
 
     -- TODO: lv_obj_update_layout is not bound.
     -- lvgl.obj_update_layout(ui.WiFi)

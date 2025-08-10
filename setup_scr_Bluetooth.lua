@@ -19,8 +19,8 @@ function setup_scr_Bluetooth(ui)
         return
     end
     lvgl.obj_set_size(ui.Bluetooth, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.Bluetooth, lvgl.SCROLLBAR_MODE_OFF())
-    lvgl.obj_set_style_bg_opa(ui.Bluetooth, 0, lvgl.PART_MAIN())
+    lvgl.obj_set_scrollbar_mode(ui.Bluetooth, lvgl.SCROLLBAR_MODE_OFF)
+    lvgl.obj_set_style_bg_opa(ui.Bluetooth, 0, lvgl.PART_MAIN)
 
     -- Create container
     ui.Bluetooth_cont_1 = lvgl.obj_create(ui.Bluetooth)
@@ -30,12 +30,12 @@ function setup_scr_Bluetooth(ui)
     end
     lvgl.obj_set_pos(ui.Bluetooth_cont_1, 0, 0)
     lvgl.obj_set_size(ui.Bluetooth_cont_1, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.Bluetooth_cont_1, lvgl.SCROLLBAR_MODE_OFF())
+    lvgl.obj_set_scrollbar_mode(ui.Bluetooth_cont_1, lvgl.SCROLLBAR_MODE_OFF)
     -- Styles for container
-    lvgl.obj_set_style_border_width(ui.Bluetooth_cont_1, 2, lvgl.PART_MAIN())
-    lvgl.obj_set_style_border_color(ui.Bluetooth_cont_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_border_side(ui.Bluetooth_cont_1, lvgl.BORDER_SIDE_FULL(), lvgl.PART_MAIN())
-    lvgl.obj_set_style_bg_color(ui.Bluetooth_cont_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN())
+    lvgl.obj_set_style_border_width(ui.Bluetooth_cont_1, 2, lvgl.PART_MAIN)
+    lvgl.obj_set_style_border_color(ui.Bluetooth_cont_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_border_side(ui.Bluetooth_cont_1, lvgl.BORDER_SIDE_FULL, lvgl.PART_MAIN)
+    lvgl.obj_set_style_bg_color(ui.Bluetooth_cont_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN)
 
     -- Spangroup "bluetooth"
     ui.Bluetooth_spangroup_1 = lvgl.spangroup_create(ui.Bluetooth_cont_1)
@@ -43,8 +43,8 @@ function setup_scr_Bluetooth(ui)
         print("Error: Failed to create Bluetooth_spangroup_1")
         return
     end
-    lvgl.spangroup_set_align(ui.Bluetooth_spangroup_1, lvgl.TEXT_ALIGN_LEFT())
-    lvgl.spangroup_set_mode(ui.Bluetooth_spangroup_1, lvgl.SPAN_MODE_BREAK())
+    lvgl.spangroup_set_align(ui.Bluetooth_spangroup_1, lvgl.TEXT_ALIGN_LEFT)
+    lvgl.spangroup_set_mode(ui.Bluetooth_spangroup_1, lvgl.SPAN_MODE_BREAK)
     ui.Bluetooth_spangroup_1_span = lvgl.spangroup_new_span(ui.Bluetooth_spangroup_1)
     lvgl.span_set_text(ui.Bluetooth_spangroup_1_span, "bluetooth")
     -- TODO: Direct span styling not supported
@@ -64,15 +64,15 @@ function setup_scr_Bluetooth(ui)
         return
     end
     lvgl.label_set_text(ui.Bluetooth_btn_1_label, "back")
-    lvgl.obj_align(ui.Bluetooth_btn_1_label, lvgl.ALIGN_CENTER(), 0, 0)
+    lvgl.obj_align(ui.Bluetooth_btn_1_label, lvgl.ALIGN_CENTER, 0, 0)
     lvgl.obj_set_pos(ui.Bluetooth_btn_1, 17, 20)
     lvgl.obj_set_size(ui.Bluetooth_btn_1, 65, 40)
     -- Styles for back button
-    lvgl.obj_set_style_bg_color(ui.Bluetooth_btn_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.Bluetooth_btn_1, 5, lvgl.PART_MAIN())
-    lvgl.obj_set_style_text_color(ui.Bluetooth_btn_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN())
+    lvgl.obj_set_style_bg_color(ui.Bluetooth_btn_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.Bluetooth_btn_1, 5, lvgl.PART_MAIN)
+    lvgl.obj_set_style_text_color(ui.Bluetooth_btn_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN)
     -- TODO: Font lv_font_montserratMedium_16 not available
-    lvgl.obj_set_style_text_font(ui.Bluetooth_btn_1, lvgl.font_montserrat_16(), lvgl.PART_MAIN())
+    lvgl.obj_set_style_text_font(ui.Bluetooth_btn_1, lvgl.font_montserrat_16(), lvgl.PART_MAIN)
 
     -- Switch
     ui.Bluetooth_sw_1 = lvgl.switch_create(ui.Bluetooth_cont_1)
@@ -83,11 +83,11 @@ function setup_scr_Bluetooth(ui)
     lvgl.obj_set_pos(ui.Bluetooth_sw_1, 386, 37)
     lvgl.obj_set_size(ui.Bluetooth_sw_1, 44, 20)
     -- Styles for switch
-    lvgl.obj_set_style_bg_color(ui.Bluetooth_sw_1, lvgl.color_hex(0xe6e2e6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.Bluetooth_sw_1, 10, lvgl.PART_MAIN())
-    lvgl.obj_set_style_bg_color(ui.Bluetooth_sw_1, lvgl.color_hex(0x2195f6), lvgl.PART_INDICATOR() + lvgl.STATE_CHECKED())
-    lvgl.obj_set_style_bg_color(ui.Bluetooth_sw_1, lvgl.color_hex(0xffffff), lvgl.PART_KNOB())
-    lvgl.obj_set_style_radius(ui.Bluetooth_sw_1, 10, lvgl.PART_KNOB())
+    lvgl.obj_set_style_bg_color(ui.Bluetooth_sw_1, lvgl.color_hex(0xe6e2e6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.Bluetooth_sw_1, 10, lvgl.PART_MAIN)
+    lvgl.obj_set_style_bg_color(ui.Bluetooth_sw_1, lvgl.color_hex(0x2195f6), lvgl.PART_INDICATOR + lvgl.STATE_CHECKED)
+    lvgl.obj_set_style_bg_color(ui.Bluetooth_sw_1, lvgl.color_hex(0xffffff), lvgl.PART_KNOB)
+    lvgl.obj_set_style_radius(ui.Bluetooth_sw_1, 10, lvgl.PART_KNOB)
 
     -- TODO: The entire lv_menu widget family is not bound in Lua.
     print("FATAL: lv_menu widget is not supported in current bindings. Bluetooth screen will be mostly empty.")
@@ -98,7 +98,7 @@ function setup_scr_Bluetooth(ui)
     end
     lvgl.obj_set_pos(ui.Bluetooth_menu_1, 55, 85)
     lvgl.obj_set_size(ui.Bluetooth_menu_1, 368, 213)
-    lvgl.obj_set_style_bg_color(ui.Bluetooth_menu_1, lvgl.color_hex(0xcccccc), lvgl.PART_MAIN()) -- Visual placeholder
+    lvgl.obj_set_style_bg_color(ui.Bluetooth_menu_1, lvgl.color_hex(0xcccccc), lvgl.PART_MAIN) -- Visual placeholder
     local menu_placeholder_label = lvgl.label_create(ui.Bluetooth_menu_1)
     if not menu_placeholder_label then
         print("Error: Failed to create menu_placeholder_label")

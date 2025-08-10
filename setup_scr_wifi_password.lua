@@ -20,8 +20,8 @@ function setup_scr_wifi_password(ui)
         return
     end
     lvgl.obj_set_size(ui.wifi_password, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.wifi_password, lvgl.SCROLLBAR_MODE_OFF())
-    lvgl.obj_set_style_bg_opa(ui.wifi_password, 0, lvgl.PART_MAIN())
+    lvgl.obj_set_scrollbar_mode(ui.wifi_password, lvgl.SCROLLBAR_MODE_OFF)
+    lvgl.obj_set_style_bg_opa(ui.wifi_password, 0, lvgl.PART_MAIN)
 
     -- Create container
     ui.wifi_password_cont_1 = lvgl.obj_create(ui.wifi_password)
@@ -31,12 +31,12 @@ function setup_scr_wifi_password(ui)
     end
     lvgl.obj_set_pos(ui.wifi_password_cont_1, 0, 0)
     lvgl.obj_set_size(ui.wifi_password_cont_1, 480, 320)
-    lvgl.obj_set_scrollbar_mode(ui.wifi_password_cont_1, lvgl.SCROLLBAR_MODE_OFF())
+    lvgl.obj_set_scrollbar_mode(ui.wifi_password_cont_1, lvgl.SCROLLBAR_MODE_OFF)
     -- Styles for container
-    lvgl.obj_set_style_border_width(ui.wifi_password_cont_1, 2, lvgl.PART_MAIN())
-    lvgl.obj_set_style_border_color(ui.wifi_password_cont_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_border_side(ui.wifi_password_cont_1, lvgl.BORDER_SIDE_FULL(), lvgl.PART_MAIN())
-    lvgl.obj_set_style_bg_color(ui.wifi_password_cont_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN())
+    lvgl.obj_set_style_border_width(ui.wifi_password_cont_1, 2, lvgl.PART_MAIN)
+    lvgl.obj_set_style_border_color(ui.wifi_password_cont_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_border_side(ui.wifi_password_cont_1, lvgl.BORDER_SIDE_FULL, lvgl.PART_MAIN)
+    lvgl.obj_set_style_bg_color(ui.wifi_password_cont_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN)
 
     -- Spangroup "password"
     ui.wifi_password_spangroup_1 = lvgl.spangroup_create(ui.wifi_password_cont_1)
@@ -44,8 +44,8 @@ function setup_scr_wifi_password(ui)
         print("Error: Failed to create wifi_password_spangroup_1")
         return
     end
-    lvgl.spangroup_set_align(ui.wifi_password_spangroup_1, lvgl.TEXT_ALIGN_LEFT())
-    lvgl.spangroup_set_mode(ui.wifi_password_spangroup_1, lvgl.SPAN_MODE_BREAK())
+    lvgl.spangroup_set_align(ui.wifi_password_spangroup_1, lvgl.TEXT_ALIGN_LEFT)
+    lvgl.spangroup_set_mode(ui.wifi_password_spangroup_1, lvgl.SPAN_MODE_BREAK)
     ui.wifi_password_spangroup_1_span = lvgl.spangroup_new_span(ui.wifi_password_spangroup_1)
     lvgl.span_set_text(ui.wifi_password_spangroup_1_span, "password")
     -- TODO: Direct span styling not supported
@@ -75,10 +75,10 @@ function setup_scr_wifi_password(ui)
     end
     -- Styles for textarea
     -- TODO: Font lv_font_montserratMedium_12 not available
-    lvgl.obj_set_style_text_font(ui.wifi_password_ta_1, lvgl.font_montserrat_12(), lvgl.PART_MAIN())
-    lvgl.obj_set_style_border_color(ui.wifi_password_ta_1, lvgl.color_hex(0xe6e6e6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_border_width(ui.wifi_password_ta_1, 2, lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.wifi_password_ta_1, 4, lvgl.PART_MAIN())
+    lvgl.obj_set_style_text_font(ui.wifi_password_ta_1, lvgl.font_montserrat_12(), lvgl.PART_MAIN)
+    lvgl.obj_set_style_border_color(ui.wifi_password_ta_1, lvgl.color_hex(0xe6e6e6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_border_width(ui.wifi_password_ta_1, 2, lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.wifi_password_ta_1, 4, lvgl.PART_MAIN)
 
     -- Button "back"
     ui.wifi_password_btn_2 = lvgl.btn_create(ui.wifi_password_cont_1)
@@ -92,15 +92,15 @@ function setup_scr_wifi_password(ui)
         return
     end
     lvgl.label_set_text(ui.wifi_password_btn_2_label, "back")
-    lvgl.obj_align(ui.wifi_password_btn_2_label, lvgl.ALIGN_CENTER(), 0, 0)
+    lvgl.obj_align(ui.wifi_password_btn_2_label, lvgl.ALIGN_CENTER, 0, 0)
     lvgl.obj_set_pos(ui.wifi_password_btn_2, 17, 20)
     lvgl.obj_set_size(ui.wifi_password_btn_2, 65, 40)
     -- Styles for back button
-    lvgl.obj_set_style_bg_color(ui.wifi_password_btn_2, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.wifi_password_btn_2, 5, lvgl.PART_MAIN())
-    lvgl.obj_set_style_text_color(ui.wifi_password_btn_2, lvgl.color_hex(0xffffff), lvgl.PART_MAIN())
+    lvgl.obj_set_style_bg_color(ui.wifi_password_btn_2, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.wifi_password_btn_2, 5, lvgl.PART_MAIN)
+    lvgl.obj_set_style_text_color(ui.wifi_password_btn_2, lvgl.color_hex(0xffffff), lvgl.PART_MAIN)
     -- TODO: Font lv_font_montserratMedium_16 not available
-    lvgl.obj_set_style_text_font(ui.wifi_password_btn_2, lvgl.font_montserrat_16(), lvgl.PART_MAIN())
+    lvgl.obj_set_style_text_font(ui.wifi_password_btn_2, lvgl.font_montserrat_16(), lvgl.PART_MAIN)
 
     -- Button "OK"
     ui.wifi_password_btn_1 = lvgl.btn_create(ui.wifi_password)
@@ -114,15 +114,15 @@ function setup_scr_wifi_password(ui)
         return
     end
     lvgl.label_set_text(ui.wifi_password_btn_1_label, "OK")
-    lvgl.obj_align(ui.wifi_password_btn_1_label, lvgl.ALIGN_CENTER(), 0, 0)
+    lvgl.obj_align(ui.wifi_password_btn_1_label, lvgl.ALIGN_CENTER, 0, 0)
     lvgl.obj_set_pos(ui.wifi_password_btn_1, 182, 199)
     lvgl.obj_set_size(ui.wifi_password_btn_1, 100, 50)
     -- Styles for OK button
-    lvgl.obj_set_style_bg_color(ui.wifi_password_btn_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN())
-    lvgl.obj_set_style_radius(ui.wifi_password_btn_1, 5, lvgl.PART_MAIN())
-    lvgl.obj_set_style_text_color(ui.wifi_password_btn_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN())
+    lvgl.obj_set_style_bg_color(ui.wifi_password_btn_1, lvgl.color_hex(0x2195f6), lvgl.PART_MAIN)
+    lvgl.obj_set_style_radius(ui.wifi_password_btn_1, 5, lvgl.PART_MAIN)
+    lvgl.obj_set_style_text_color(ui.wifi_password_btn_1, lvgl.color_hex(0xffffff), lvgl.PART_MAIN)
     -- TODO: Font lv_font_montserratMedium_16 not available
-    lvgl.obj_set_style_text_font(ui.wifi_password_btn_1, lvgl.font_montserrat_16(), lvgl.PART_MAIN())
+    lvgl.obj_set_style_text_font(ui.wifi_password_btn_1, lvgl.font_montserrat_16(), lvgl.PART_MAIN)
 
     -- TODO: lv_obj_update_layout is not bound.
     -- lvgl.obj_update_layout(ui.wifi_password)
